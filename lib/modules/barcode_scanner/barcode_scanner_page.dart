@@ -21,7 +21,8 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
       if (controller.status.hasBarcode) {
-        Navigator.pushReplacementNamed(context, "/insert_boleto");
+        Navigator.pushReplacementNamed(context, "/insert_boleto",
+            arguments: controller.status.barcode);
       }
     });
     super.initState();
@@ -46,7 +47,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
           builder: (_, status, __) {
             if (status.showCamera) {
               return Container(
-                child: status.cameraController!.buildPreview(),
+                child: controller.cameraController!.buildPreview(),
               );
             } else {
               return Container();
@@ -87,9 +88,11 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
               ),
               bottomNavigationBar: SetLabelButtons(
                 primaryLabel: "Inserir o código do boleto",
-                primaryOnPressed: () {},
+                primaryOnPressed: () {
+                  Navigator.pushReplacementNamed(context, "/insert_boleto");
+                },
                 secondaryLabel: "Adicionar da galeria",
-                secondaryOnPressed: () {},
+                secondaryOnPressed: controller.scanWithImagePicker,
               )),
         ),
         ValueListenableBuilder<BarcodeScannerStatus>(
@@ -102,10 +105,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                     "Tente escanear novamente ou digite o código do seu boleto.",
                 primaryLabel: "Escanear novamente",
                 primaryOnPressed: () {
-                  controller.getAvailableCameras();
+                  controller.scanWithCamera();
                 },
                 secondaryLabel: "Digitar código",
-                secondaryOnPressed: () {},
+                secondaryOnPressed: () {
+                  Navigator.pushReplacementNamed(context, "/insert_boleto");
+                },
               );
             } else {
               return Container();

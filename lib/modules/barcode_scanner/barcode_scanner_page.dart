@@ -41,83 +41,90 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
       bottom: true,
       left: true,
       right: true,
-      child: Stack(children: [
-        ValueListenableBuilder<BarcodeScannerStatus>(
-          valueListenable: controller.statusNotifier,
-          builder: (_, status, __) {
-            if (status.showCamera) {
-              return Container(
-                child: controller.cameraController!.buildPreview(),
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-        RotatedBox(
-          quarterTurns: 1,
-          child: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.black,
-                title: Text(
-                  "Escaneie o código de barras do boleto",
-                  style: TextStyles.buttonBackground,
+      child: Stack(
+        children: [
+          ValueListenableBuilder<BarcodeScannerStatus>(
+              valueListenable: controller.statusNotifier,
+              builder: (_, status, __) {
+                if (status.showCamera) {
+                  return Container(
+                    color: Colors.blue,
+                    child: controller.cameraController!.buildPreview(),
+                  );
+                } else {
+                  return Container();
+                }
+              }),
+          RotatedBox(
+            quarterTurns: 1,
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  title: Text(
+                    "Escaneie o código de barras do boleto",
+                    style: TextStyles.buttonBackground,
+                  ),
+                  leading: BackButton(
+                    color: AppColors.background,
+                  ),
                 ),
-                centerTitle: true,
-                leading: BackButton(
-                  color: AppColors.background,
-                ),
-              ),
-              body: Column(
-                children: [
-                  Expanded(
+                body: Column(
+                  children: [
+                    Expanded(
                       child: Container(
-                    color: Colors.black.withOpacity(0.7),
-                  )),
-                  Expanded(
+                        color: Colors.black.withOpacity(0.7),
+                      ),
+                    ),
+                    Expanded(
                       flex: 2,
                       child: Container(
                         color: Colors.transparent,
-                      )),
-                  Expanded(
+                      ),
+                    ),
+                    Expanded(
                       child: Container(
-                    color: Colors.black.withOpacity(0.7),
-                  )),
-                ],
-              ),
-              bottomNavigationBar: SetLabelButtons(
-                primaryLabel: "Inserir o código do boleto",
-                primaryOnPressed: () {
-                  Navigator.pushReplacementNamed(context, "/insert_boleto");
-                },
-                secondaryLabel: "Adicionar da galeria",
-                secondaryOnPressed: controller.scanWithImagePicker,
-              )),
-        ),
-        ValueListenableBuilder<BarcodeScannerStatus>(
-          valueListenable: controller.statusNotifier,
-          builder: (_, status, __) {
-            if (status.hasError) {
-              return BottomSheetWidget(
-                title: "Não foi possível identificar um código de barras.",
-                subtitle:
-                    "Tente escanear novamente ou digite o código do seu boleto.",
-                primaryLabel: "Escanear novamente",
-                primaryOnPressed: () {
-                  controller.scanWithCamera();
-                },
-                secondaryLabel: "Digitar código",
-                secondaryOnPressed: () {
-                  Navigator.pushReplacementNamed(context, "/insert_boleto");
-                },
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ]),
+                        color: Colors.black.withOpacity(0.7),
+                      ),
+                    )
+                  ],
+                ),
+                bottomNavigationBar: SetLabelButtons(
+                  primaryLabel: "Inserir o código do boleto",
+                  primaryOnPressed: () {
+                    Navigator.pushReplacementNamed(context, "/insert_boleto");
+                  },
+                  secondaryLabel: "Adicionar da galeria",
+                  secondaryOnPressed: controller.scanWithImagePicker,
+                )),
+          ),
+          ValueListenableBuilder<BarcodeScannerStatus>(
+              valueListenable: controller.statusNotifier,
+              builder: (_, status, __) {
+                if (status.hasError) {
+                  return Align(
+                      alignment: Alignment.bottomLeft,
+                      child: BottomSheetWidget(
+                          primaryLabel: "Escanear novamente",
+                          primaryOnPressed: () {
+                            controller.scanWithCamera();
+                          },
+                          secondaryLabel: "Digitar código",
+                          secondaryOnPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, "/insert_boleto");
+                          },
+                          title:
+                              "Não foi possível identificar um código de barras.",
+                          subtitle:
+                              "Tente escanear novamente ou digite o código do seu boleto."));
+                } else {
+                  return Container();
+                }
+              }),
+        ],
+      ),
     );
   }
 }

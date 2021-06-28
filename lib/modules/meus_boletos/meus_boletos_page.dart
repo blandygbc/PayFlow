@@ -62,6 +62,10 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
               controller: controller,
             ),
           ),
+          SizedBox(
+            width: double.infinity,
+            height: 149,
+          )
         ],
       ),
     );

@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(152),
         child: Container(
@@ -66,14 +67,16 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Container(
         height: 149,
         decoration: BoxDecoration(
-            color: Colors.white,
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white.withOpacity(0.0),
-                  Colors.white,
-                ])),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment(0.0, 0.2),
+            colors: [
+              Colors.white.withOpacity(0.0),
+              Colors.white60,
+              Colors.white,
+            ],
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.only(top: 57),
           child: Row(

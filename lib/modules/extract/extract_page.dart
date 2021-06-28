@@ -43,6 +43,10 @@ class _ExtractPageState extends State<ExtractPage> {
               controller: controller,
             ),
           ),
+          SizedBox(
+            width: double.infinity,
+            height: 149,
+          )
         ],
       ),
     );

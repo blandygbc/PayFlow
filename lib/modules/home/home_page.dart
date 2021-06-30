@@ -30,33 +30,43 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBody: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(152),
+        preferredSize: Size.fromHeight(130),
         child: Container(
-          height: 152,
-          color: AppColors.primary,
+          height: 130,
+          decoration: BoxDecoration(
+              gradient: RadialGradient(
+                  center: Alignment(0.0, 1.9),
+                  radius: 1.2,
+                  colors: [
+                Colors.orange.shade100,
+                AppColors.primary,
+              ])),
           child: Center(
-            child: ListTile(
-              title: Text.rich(TextSpan(
-                  text: "Olá, ",
-                  style: TextStyles.titleRegular,
-                  children: [
-                    TextSpan(
-                      text: "${widget.user.name}",
-                      style: TextStyles.titleBoldBackground,
-                    )
-                  ])),
-              subtitle: Text(
-                "Mantenha suas contas em dia!",
-                style: TextStyles.captionShape,
-              ),
-              trailing: Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                      image: NetworkImage(widget.user.photoURL!)),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ListTile(
+                title: Text.rich(TextSpan(
+                    text: "Olá, ",
+                    style: TextStyles.titleRegular,
+                    children: [
+                      TextSpan(
+                        text: "${widget.user.name}",
+                        style: TextStyles.titleBoldBackground,
+                      )
+                    ])),
+                subtitle: Text(
+                  "Mantenha suas contas em dia!",
+                  style: TextStyles.captionShape,
+                ),
+                trailing: Container(
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                        image: NetworkImage(widget.user.photoURL!)),
+                  ),
                 ),
               ),
             ),

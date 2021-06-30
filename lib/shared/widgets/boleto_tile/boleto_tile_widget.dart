@@ -11,6 +11,8 @@ class BoletoTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedCard(
       direction: AnimatedCardDirection.right,
+      duration: Duration(milliseconds: 1200),
+      curve: Curves.easeOut,
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         title: Text(

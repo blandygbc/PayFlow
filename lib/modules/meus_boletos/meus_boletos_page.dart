@@ -22,10 +22,15 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
       child: Column(
         children: [
           Stack(children: [
-            Container(
-              color: AppColors.primary,
-              height: 40,
-              width: double.infinity,
+            AnimatedCard(
+              direction: AnimatedCardDirection.top,
+              duration: Duration(milliseconds: 1450),
+              curve: Curves.easeOut,
+              child: Container(
+                color: AppColors.primary,
+                height: 40,
+                width: double.infinity,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -33,6 +38,8 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
                 valueListenable: controller.boletosNotifier,
                 builder: (_, boletos, __) => AnimatedCard(
                     direction: AnimatedCardDirection.top,
+                    duration: Duration(milliseconds: 1450),
+                    curve: Curves.easeOut,
                     child: BoletoInfoWidget(size: boletos.length)),
               ),
             ),

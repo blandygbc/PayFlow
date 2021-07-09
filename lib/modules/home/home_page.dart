@@ -101,10 +101,13 @@ class _HomePageState extends State<HomePage> {
                       setState(() {});
                     },
                     icon: Icon(
-                      FontAwesomeIcons.home,
+                      controller.currentpage == 0
+                          ? Icons.home
+                          : Icons.home_outlined,
                       color: controller.currentpage == 0
                           ? AppColors.primary
                           : AppColors.body,
+                      size: 34,
                     )),
               ),
               GestureDetector(
@@ -131,7 +134,9 @@ class _HomePageState extends State<HomePage> {
                       setState(() {});
                     },
                     icon: Icon(
-                      FontAwesomeIcons.fileAlt,
+                      controller.currentpage == 1
+                          ? FontAwesomeIcons.solidFileAlt
+                          : FontAwesomeIcons.fileAlt,
                       color: controller.currentpage == 1
                           ? AppColors.primary
                           : AppColors.body,

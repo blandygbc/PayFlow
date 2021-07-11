@@ -99,22 +99,20 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                       controller.onChange(barcode: value);
                     },
                   ),
-                ]))
+                ])),
           ],
         ),
       ),
-      bottomNavigationBar: SetLabelButtons(
+      bottomSheet: SetLabelButtons(
         primaryLabel: "Cancelar",
         primaryOnPressed: () {
-          // Navigator.pop(context);
-          Navigator.pop(context, "/home");
+          Navigator.pop(context);
         },
         secondaryLabel: "Cadastrar",
         enableSecondaryColor: true,
         secondaryOnPressed: () async {
           await controller.cadastrarBoleto();
-          // Navigator.pop(context);
-          Navigator.pop(context, "/home");
+          Navigator.popUntil(context, ModalRoute.withName("/home"));
         },
       ),
     );
